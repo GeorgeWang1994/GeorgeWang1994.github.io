@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: http://george1994.com/sitemap.xml
