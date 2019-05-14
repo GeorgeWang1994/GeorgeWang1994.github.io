@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>工作 on GeorgeWang&#39;s Blog</title>
+    <link>https://GeorgeWang1994.github.io/categories/%E5%B7%A5%E4%BD%9C/</link>
+    <description>Recent content in 工作 on GeorgeWang&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 13 May 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://GeorgeWang1994.github.io/categories/%E5%B7%A5%E4%BD%9C/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>TLS之指定密码口令</title>
+      <link>https://GeorgeWang1994.github.io/post/tls%E4%B9%8B%E6%8C%87%E5%AE%9A%E5%AF%86%E7%A0%81%E5%8F%A3%E4%BB%A4/</link>
+      <pubDate>Mon, 13 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://GeorgeWang1994.github.io/post/tls%E4%B9%8B%E6%8C%87%E5%AE%9A%E5%AF%86%E7%A0%81%E5%8F%A3%E4%BB%A4/</guid>
+      <description>TLS之指定密码口令 在利用namp来检查端口的安全性的时候发现，出现一个弱密码，导致最终的结果为C，最终的结果是想要把它变成A，因此需要把这</description>
+    </item>
+    
+  </channel>
+</rss>
