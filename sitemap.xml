@@ -10,13 +10,50 @@
   
   <url>
     <loc>https://GeorgeWang1994.github.io/categories/</loc>
-    <lastmod>2019-05-25T15:49:34+08:00</lastmod>
+    <lastmod>2019-05-25T21:04:00+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://GeorgeWang1994.github.io/</loc>
-    <lastmod>2019-05-25T15:49:34+08:00</lastmod>
+    <lastmod>2019-05-25T21:04:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://GeorgeWang1994.github.io/post/</loc>
+    <lastmod>2019-05-25T21:04:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://GeorgeWang1994.github.io/tags/</loc>
+    <lastmod>2019-05-25T21:04:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://GeorgeWang1994.github.io/tags/%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97/</loc>
+    <lastmod>2019-05-25T21:04:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://GeorgeWang1994.github.io/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</loc>
+    <lastmod>2019-05-25T21:04:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://GeorgeWang1994.github.io/post/%E5%AE%9E%E7%8E%B0%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97%E8%A3%85%E9%A5%B0%E5%99%A8/</loc>
+    <lastmod>2019-05-25T21:04:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://GeorgeWang1994.github.io/tags/%E8%A3%85%E9%A5%B0%E5%99%A8/</loc>
+    <lastmod>2019-05-25T21:04:00+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -25,18 +62,6 @@
     <lastmod>2019-05-25T15:49:34+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://GeorgeWang1994.github.io/post/</loc>
-    <lastmod>2019-05-25T15:49:34+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://GeorgeWang1994.github.io/tags/</loc>
-    <lastmod>2019-05-25T15:49:34+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
