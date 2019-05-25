@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Migrate分支思考 - GeorgeWang&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="GeorgeWang" /><meta name="description" content="migrate分支思考 1. 问题描述 最近在工作中同事遇到了一些问题，问题如下： 在master分支中修改了model，并且已经生成了migrati" /><meta name="keywords" content="George, blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.5 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://GeorgeWang1994.github.io/post/migrate%E5%88%86%E6%94%AF%E6%80%9D%E8%80%83/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.7e107b8a.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Migrate分支思考" />
+<meta property="og:description" content="migrate分支思考 1. 问题描述 最近在工作中同事遇到了一些问题，问题如下： 在master分支中修改了model，并且已经生成了migrati" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://GeorgeWang1994.github.io/post/migrate%E5%88%86%E6%94%AF%E6%80%9D%E8%80%83/" />
+<meta property="article:published_time" content="2019-05-25T15:49:34&#43;08:00"/>
+<meta property="article:modified_time" content="2019-05-25T15:49:34&#43;08:00"/>
+
+<meta itemprop="name" content="Migrate分支思考">
+<meta itemprop="description" content="migrate分支思考 1. 问题描述 最近在工作中同事遇到了一些问题，问题如下： 在master分支中修改了model，并且已经生成了migrati">
+
+
+<meta itemprop="datePublished" content="2019-05-25T15:49:34&#43;08:00" />
+<meta itemprop="dateModified" content="2019-05-25T15:49:34&#43;08:00" />
+<meta itemprop="wordCount" content="603">
+
+
+
+<meta itemprop="keywords" content="migrate," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Migrate分支思考"/>
+<meta name="twitter:description" content="migrate分支思考 1. 问题描述 最近在工作中同事遇到了一些问题，问题如下： 在master分支中修改了model，并且已经生成了migrati"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GeorgeWang&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GeorgeWang&#39;s Blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Migrate分支思考</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-05-25 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%B7%A5%E4%BD%9C/"> 工作 </a>
+            </div>
+          <span class="more-meta"> 约 603 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#migrate分支思考">migrate分支思考</a>
+<ul>
+<li><a href="#1-问题描述">1. 问题描述</a></li>
+<li><a href="#2-解决方案">2. 解决方案</a>
+<ul>
+<li><a href="#2-1-手动修改">2.1 手动修改</a></li>
+<li><a href="#2-2-merge">2.2 merge</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p><meta name="referrer" content="no-referrer" /></p>
+
+<h1 id="migrate分支思考">migrate分支思考</h1>
+
+<h2 id="1-问题描述">1. 问题描述</h2>
+
+<p>最近在工作中同事遇到了一些问题，问题如下：</p>
+
+<p><strong>在master分支中修改了model，并且已经生成了migrations，与此同时，在master分支也更改了model，也生成了migrations，两个分支改动model的地方都是不一样的，后面想将分支系统合并到了master分支，出现了冲突后的解决方案应该怎么办？</strong></p>
+
+<h2 id="2-解决方案">2. 解决方案</h2>
+
+<h3 id="2-1-手动修改">2.1 手动修改</h3>
+
+<p>我首先想到的是，将分支系统中的migration的option操作手动都合并到master分支对应的版本的option中，然后再在master分支进行一次migrate，自己手动实验了下，是可行的。</p>
+
+<p>需要改动的地方包括<code>dependencies</code>和<code>operations</code>，总之就是按照master的migrate的逻辑在更改。</p>
+
+<p>或者直接对更改migration的文件名字为<code>最新</code>，并且更改<code>dependencies</code>，同样也可以操作。</p>
+
+<h3 id="2-2-merge">2.2 merge</h3>
+
+<p>直接执行<code>makemigrations</code>，它会提示出现了冲突，需要进行<code>migration merge</code>操作，因此按照它提供的步骤做即可，到时就会出现一个option为空，并且dependencies为两个冲突文件的一个新的文件，如下：</p>
+
+<p><img src="https://wx2.sinaimg.cn/large/007FyU7Tly1g3dn8jmsmbj31dy0hijvm.jpg" alt="image" /></p>
+
+<blockquote>
+<p>如果你觉得这些文件比较冗余，可以通过<code>squashmigrate</code>命令将截止到你设置的migration文件合并成一个新的文件，里面包含了历来的更改操作。</p>
+</blockquote>
+
+<p>以上，进行测试的代码在<a href="https://github.com/GeorgeWang1994/test_migration">Github</a>能够找到。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">GeorgeWang</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-05-25
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://ws1.sinaimg.cn/mw690/007FyU7Tgy1g302zcpej1j30u00u0wll.jpg">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/migrate/">migrate</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/docker%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/">
+            <span class="next-text nav-default">Docker使用总结</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="georgewange1994@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/GeorgeWang1994/" class="iconfont icon-github" title="github"></a>
+  <a href="https://GeorgeWang1994.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">GeorgeWang</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

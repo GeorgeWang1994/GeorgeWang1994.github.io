@@ -10,7 +10,44 @@
   
   <url>
     <loc>https://GeorgeWang1994.github.io/categories/</loc>
-    <lastmod>2019-05-19T00:00:00+00:00</lastmod>
+    <lastmod>2019-05-25T15:49:34+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://GeorgeWang1994.github.io/</loc>
+    <lastmod>2019-05-25T15:49:34+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://GeorgeWang1994.github.io/post/migrate%E5%88%86%E6%94%AF%E6%80%9D%E8%80%83/</loc>
+    <lastmod>2019-05-25T15:49:34+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://GeorgeWang1994.github.io/post/</loc>
+    <lastmod>2019-05-25T15:49:34+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://GeorgeWang1994.github.io/tags/</loc>
+    <lastmod>2019-05-25T15:49:34+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://GeorgeWang1994.github.io/tags/migrate/</loc>
+    <lastmod>2019-05-25T15:49:34+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://GeorgeWang1994.github.io/categories/%E5%B7%A5%E4%BD%9C/</loc>
+    <lastmod>2019-05-25T15:49:34+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -28,24 +65,6 @@
   </url>
   
   <url>
-    <loc>https://GeorgeWang1994.github.io/</loc>
-    <lastmod>2019-05-19T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://GeorgeWang1994.github.io/post/</loc>
-    <lastmod>2019-05-19T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://GeorgeWang1994.github.io/tags/</loc>
-    <lastmod>2019-05-19T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://GeorgeWang1994.github.io/tags/docker/</loc>
     <lastmod>2019-05-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -60,12 +79,6 @@
   
   <url>
     <loc>https://GeorgeWang1994.github.io/tags/tls/</loc>
-    <lastmod>2019-05-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://GeorgeWang1994.github.io/categories/%E5%B7%A5%E4%BD%9C/</loc>
     <lastmod>2019-05-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
