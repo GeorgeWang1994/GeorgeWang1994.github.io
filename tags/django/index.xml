@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>django on GeorgeWang&#39;s Blog</title>
+    <link>https://GeorgeWang1994.github.io/tags/django/</link>
+    <description>Recent content in django on GeorgeWang&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 26 May 2019 17:34:18 +0800</lastBuildDate>
+    
+	<atom:link href="https://GeorgeWang1994.github.io/tags/django/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Django ORM 批量获取总结</title>
+      <link>https://GeorgeWang1994.github.io/post/django-orm-%E6%89%B9%E9%87%8F%E8%8E%B7%E5%8F%96%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Sun, 26 May 2019 17:34:18 +0800</pubDate>
+      
+      <guid>https://GeorgeWang1994.github.io/post/django-orm-%E6%89%B9%E9%87%8F%E8%8E%B7%E5%8F%96%E6%80%BB%E7%BB%93/</guid>
+      <description>Django ORM 批量获取总结 背景 其实在上一家的公司的时候，大家在代码Review的时候都建议使用批量获取的方法去操作数据库，然后在这家公司的时候，我也就</description>
+    </item>
+    
+  </channel>
+</rss>
