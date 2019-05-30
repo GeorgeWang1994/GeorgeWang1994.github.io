@@ -1,6 +1,4 @@
 
-<meta name="referrer" content="no-referrer" />
-
 # migrate分支思考
 
 ## 1. 问题描述

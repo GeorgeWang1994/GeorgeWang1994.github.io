@@ -1,6 +1,4 @@
 
-<meta name="referrer" content="no-referrer" />
-
 # 实现任务队列装饰器
 
 ## 总结

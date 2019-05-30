@@ -1,6 +1,4 @@
 
-<meta name="referrer" content="no-referrer" />
-
 # Django ORM 批量获取总结
 
 ## 背景
