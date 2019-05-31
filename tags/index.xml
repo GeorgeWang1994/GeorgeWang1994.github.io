@@ -6,17 +6,26 @@
     <description>Recent content in Tags on GeorgeWang&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 26 May 2019 17:34:18 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 30 May 2019 22:00:58 +0800</lastBuildDate>
     
 	<atom:link href="https://GeorgeWang1994.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>django</title>
+      <title>Django</title>
       <link>https://GeorgeWang1994.github.io/tags/django/</link>
-      <pubDate>Sun, 26 May 2019 17:34:18 +0800</pubDate>
+      <pubDate>Thu, 30 May 2019 22:00:58 +0800</pubDate>
       
       <guid>https://GeorgeWang1994.github.io/tags/django/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>数据库</title>
+      <link>https://GeorgeWang1994.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Thu, 30 May 2019 22:00:58 +0800</pubDate>
+      
+      <guid>https://GeorgeWang1994.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
       <description></description>
     </item>
     
