@@ -33,7 +33,7 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.7e107b8a.min.css" rel="stylesheet">
+<link href="/dist/even.3cee3f7f.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-06-01T17:14:06&#43;08:00" />
 <meta itemprop="dateModified" content="2019-06-01T17:14:06&#43;08:00" />
-<meta itemprop="wordCount" content="1422">
+<meta itemprop="wordCount" content="1113">
 
 
 
@@ -131,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/python/"> Python </a>
             </div>
-          <span class="more-meta"> 约 1422 字 </span>
+          <span class="more-meta"> 约 1113 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -313,71 +313,13 @@
 </div>
 </div>
 <p>得到的结果如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma"> // add_counter的操作
- 53           0 LOAD_GLOBAL              0 (counter)  // 加载全局变量counter
-              2 LOAD_CONST               1 (1)        // 加载常量1
-              4 INPLACE_ADD														// counter + 1
-              6 STORE_GLOBAL             0 (counter)  // 将加1后的结果存储到counter中
-              8 LOAD_CONST               0 (None)     // 加载None
-             10 RETURN_VALUE													// 将None作为返回值
-None
 
-// add_counter_list的操作
-53           0 LOAD_GLOBAL              0 (counter_list)   // 加载全局变量counter_list
-              2 LOAD_METHOD              1 (append)				 // 加载列表的append方法
-              4 LOAD_CONST               1 (1)						 // 加载常量1
-              6 CALL_METHOD              1   							 // 调用append方法
-              8 POP_TOP																		 // 插入到列表末尾
-             10 LOAD_CONST               0 (None)					 // 加载None
-             12 RETURN_VALUE															 // 将None作为返回值
-None</pre></td></tr></table>
-</div>
-</div>
+<p><img src="https://wx3.sinaimg.cn/large/007FyU7Tly1g3lvu9j2jlj318m0mo49v.jpg" alt="image" /></p>
+
 <p>可以发现<code>counter += 1</code>包含了两个步骤，分别是<code>+1</code>和<code>赋值</code>的操作，并不是一个原子操作，也就说，当多个线程在执行的过程中，在这两个步骤中的任意时刻线程被切换成其他的线程，那么数据就会打乱，举例如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">// init counter = 0 
 
-temp1 = counter + 1   // thread1 ✅
-temp2 = counter + 1   // thread2 ✅
-counter = temp2       // thread2 ✅
-counter = temp1       // thread1，❌
+<p><img src="https://wx1.sinaimg.cn/large/007FyU7Tly1g3lvuq5s3ij318i0awn11.jpg" alt="image" /></p>
 
-// 此时counter为1，而不是我们期待的结果2</pre></td></tr></table>
-</div>
-</div>
 <p>但是可以发现<code>list.append</code>操作是原子操作，只有一个操作命令，也就是说这个操作在执行过程中不会切换线程，要么执行成功，要么不执行，因此最终的结果和我们的设想是一致的。</p>
 
 <p>如果要将上述的线程安全的代码改为线程安全的，需要加上锁，对这个公共资源进行保护操作，当一个线程获取到锁的时候才能够操作该资源，并且操作完成后释放锁提供给下一个线程继续使用。</p>

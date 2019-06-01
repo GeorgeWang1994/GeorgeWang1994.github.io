@@ -16,6 +16,7 @@
 
 
 ```python
+
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
@@ -70,6 +71,7 @@ if __name__ == "__main__":
 得到的结果如下：
 
 ```
+
 last counter: 23, last counter_list: []
 
 # last counter 得到的结果每次都不一样
@@ -109,26 +111,7 @@ print(dis(add_counter_list))
 
 
 
-```
- // add_counter的操作
- 53           0 LOAD_GLOBAL              0 (counter)  // 加载全局变量counter
-              2 LOAD_CONST               1 (1)        // 加载常量1
-              4 INPLACE_ADD														// counter + 1
-              6 STORE_GLOBAL             0 (counter)  // 将加1后的结果存储到counter中
-              8 LOAD_CONST               0 (None)     // 加载None
-             10 RETURN_VALUE													// 将None作为返回值
-None
-
-// add_counter_list的操作
-53           0 LOAD_GLOBAL              0 (counter_list)   // 加载全局变量counter_list
-              2 LOAD_METHOD              1 (append)				 // 加载列表的append方法
-              4 LOAD_CONST               1 (1)						 // 加载常量1
-              6 CALL_METHOD              1   							 // 调用append方法
-              8 POP_TOP																		 // 插入到列表末尾
-             10 LOAD_CONST               0 (None)					 // 加载None
-             12 RETURN_VALUE															 // 将None作为返回值
-None
-```
+![image](https://wx3.sinaimg.cn/large/007FyU7Tly1g3lvu9j2jlj318m0mo49v.jpg)
 
 
 
@@ -136,16 +119,7 @@ None
 
 
 
-```
-// init counter = 0 
-
-temp1 = counter + 1   // thread1 ✅
-temp2 = counter + 1   // thread2 ✅
-counter = temp2       // thread2 ✅
-counter = temp1       // thread1，❌
-
-// 此时counter为1，而不是我们期待的结果2
-```
+![image](https://wx1.sinaimg.cn/large/007FyU7Tly1g3lvuq5s3ij318i0awn11.jpg)
 
 
 
