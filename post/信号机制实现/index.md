@@ -15,7 +15,7 @@
 
 
 
-![IMG_57EE3CF662CB-1](/Users/dading.wang/Downloads/IMG_57EE3CF662CB-1.jpeg)
+![](http://wx4.sinaimg.cn/large/007FyU7Tly1g3lz27gditj30p70dwtf9.jpg)
 
 
 
@@ -184,4 +184,4 @@ if __name__ == "__main__":
 
 
 
-小明被删除了以后，就不再收到课程开始的提醒。
+可以发现，小红的订阅函数在被删除了以后，就不再收到课程开始的提醒。
