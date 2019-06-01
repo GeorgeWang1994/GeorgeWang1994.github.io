@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>线程安全总结 - GeorgeWang&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="referrer" content="no-referrer" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="GeorgeWang" /><meta name="description" content="线程安全总结" /><meta name="keywords" content="George, blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.5 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://GeorgeWang1994.github.io/post/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E6%80%BB%E7%BB%93/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.7e107b8a.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="线程安全总结" />
+<meta property="og:description" content="线程安全总结" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://GeorgeWang1994.github.io/post/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E6%80%BB%E7%BB%93/" />
+<meta property="article:published_time" content="2019-06-01T17:14:06&#43;08:00"/>
+<meta property="article:modified_time" content="2019-06-01T17:14:06&#43;08:00"/>
+
+<meta itemprop="name" content="线程安全总结">
+<meta itemprop="description" content="线程安全总结">
+
+
+<meta itemprop="datePublished" content="2019-06-01T17:14:06&#43;08:00" />
+<meta itemprop="dateModified" content="2019-06-01T17:14:06&#43;08:00" />
+<meta itemprop="wordCount" content="1422">
+
+
+
+<meta itemprop="keywords" content="多线程," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="线程安全总结"/>
+<meta name="twitter:description" content="线程安全总结"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GeorgeWang&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GeorgeWang&#39;s Blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">线程安全总结</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-06-01 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> Python </a>
+            </div>
+          <span class="more-meta"> 约 1422 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#线程安全总结">线程安全总结</a>
+<ul>
+<li><a href="#背景">背景</a></li>
+<li><a href="#实验">实验</a></li>
+<li><a href="#思考">思考</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h1 id="线程安全总结">线程安全总结</h1>
+
+<h2 id="背景">背景</h2>
+
+<p>记得之前在面试的过程中的时候，问了一道题目，关于线程安全的：多个线程同时对一个公共的数字进行加1，最后的结果可以保持一致吗？然而当时我并不知道😢。而且最近在自己的开源项目中也用到了线程的队列，因此想说正好给总结一下好了。</p>
+
+<h2 id="实验">实验</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding:utf-8 -*-</span>
+
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">@author:    george wang
+</span><span class="s2">@datetime:  2019-06-01
+</span><span class="s2">@file:      test_threading.py
+</span><span class="s2">@contact:   georgewang1994@163.com
+</span><span class="s2">@desc:      测试线程
+</span><span class="s2">&#34;&#34;&#34;</span>
+
+<span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">counter_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">counter_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>  <span class="c1"># 只是定义一个锁,并不是给资源加锁,你可以定义多个锁,像下两行代码,当你需要占用这个资源时，任何一个锁都可以锁这个资源</span>
+
+
+<span class="c1"># 可以使用上边三个锁的任何一个来锁定资源</span>
+
+<span class="k">class</span> <span class="nc">MyThread</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>  <span class="c1"># 使用类定义thread，继承threading.Thread</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;Thread-&#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># run函数必须实现</span>
+        <span class="k">global</span> <span class="n">counter</span><span class="p">,</span> <span class="n">counter_list</span>  <span class="c1"># 多线程是共享资源的，使用全局变量</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">):</span>
+            <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">counter</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">counter_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">counter_list</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;I am </span><span class="si">%s</span><span class="s2">, set counter:</span><span class="si">%s</span><span class="s2">, set counter_list:</span><span class="si">%s</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">counter_list</span><span class="p">))</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+    <span class="n">my_thread_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">):</span>
+        <span class="n">my_thread</span> <span class="o">=</span> <span class="n">MyThread</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">my_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">my_thread_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">my_thread</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">thread</span> <span class="ow">in</span> <span class="n">my_thread_list</span><span class="p">:</span>
+        <span class="n">thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;last counter: </span><span class="si">%s</span><span class="s2">, last counter_list: </span><span class="si">%s</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">counter_list</span><span class="p">))</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>得到的结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">last counter: 23, last counter_list: []
+
+# last counter 得到的结果每次都不一样
+# last counter_list 得到的结果始终是一致</pre></td></tr></table>
+</div>
+</div>
+<h2 id="思考">思考</h2>
+
+<p>上面的结果中<code>counter_list</code>的结果和我们设想的保持一致，但是<code>counter</code>的结果却不是0？</p>
+
+<p>我们先来分析一下他们的原子操作：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">dis</span> <span class="kn">import</span> <span class="n">dis</span>
+
+<span class="k">def</span> <span class="nf">add_counter</span><span class="p">():</span>
+  <span class="k">global</span> <span class="n">counter</span>
+  <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+  
+<span class="k">def</span> <span class="nf">add_counter_list</span><span class="p">():</span>
+  <span class="k">global</span> <span class="n">counter_list</span>
+  <span class="n">counter_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">dis</span><span class="p">(</span><span class="n">add_counter</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">dis</span><span class="p">(</span><span class="n">add_counter_list</span><span class="p">))</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>得到的结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"> // add_counter的操作
+ 53           0 LOAD_GLOBAL              0 (counter)  // 加载全局变量counter
+              2 LOAD_CONST               1 (1)        // 加载常量1
+              4 INPLACE_ADD														// counter + 1
+              6 STORE_GLOBAL             0 (counter)  // 将加1后的结果存储到counter中
+              8 LOAD_CONST               0 (None)     // 加载None
+             10 RETURN_VALUE													// 将None作为返回值
+None
+
+// add_counter_list的操作
+53           0 LOAD_GLOBAL              0 (counter_list)   // 加载全局变量counter_list
+              2 LOAD_METHOD              1 (append)				 // 加载列表的append方法
+              4 LOAD_CONST               1 (1)						 // 加载常量1
+              6 CALL_METHOD              1   							 // 调用append方法
+              8 POP_TOP																		 // 插入到列表末尾
+             10 LOAD_CONST               0 (None)					 // 加载None
+             12 RETURN_VALUE															 // 将None作为返回值
+None</pre></td></tr></table>
+</div>
+</div>
+<p>可以发现<code>counter += 1</code>包含了两个步骤，分别是<code>+1</code>和<code>赋值</code>的操作，并不是一个原子操作，也就说，当多个线程在执行的过程中，在这两个步骤中的任意时刻线程被切换成其他的线程，那么数据就会打乱，举例如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">// init counter = 0 
+
+temp1 = counter + 1   // thread1 ✅
+temp2 = counter + 1   // thread2 ✅
+counter = temp2       // thread2 ✅
+counter = temp1       // thread1，❌
+
+// 此时counter为1，而不是我们期待的结果2</pre></td></tr></table>
+</div>
+</div>
+<p>但是可以发现<code>list.append</code>操作是原子操作，只有一个操作命令，也就是说这个操作在执行过程中不会切换线程，要么执行成功，要么不执行，因此最终的结果和我们的设想是一致的。</p>
+
+<p>如果要将上述的线程安全的代码改为线程安全的，需要加上锁，对这个公共资源进行保护操作，当一个线程获取到锁的时候才能够操作该资源，并且操作完成后释放锁提供给下一个线程继续使用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">counter_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+
+<span class="c1"># 使用`with`可以自动实现锁的获取和释放</span>
+<span class="c1"># 相当于counter_lock.acquire()和counter_lock.release()</span>
+<span class="k">with</span> <span class="n">counter_lock</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">):</span>
+        <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">counter</span> <span class="o">-=</span> <span class="mi">1</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>如果需要在多线程环境中使用队列，<code>theading</code>模块则提供了<code>Queuue</code>保证资源的安全。</p>
+
+<blockquote>
+<p>至于上面的代码中为什么要遍历这么多次，比如遍历100次或者不遍历，那么最终的结果和我们的猜想是一致的。我的猜想是需要对这个资源不断的操作，直至有很大的可能出现在操作这个资源的过程中，线程被切换，如果仅仅执行少的次数或者不执行，那么这个操作会非常快的结束，根本不会出现操作的过程中被切换线程的情况。</p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">GeorgeWang</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-06-01
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://ws1.sinaimg.cn/mw690/007FyU7Tgy1g302zcpej1j30u00u0wll.jpg">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/django%E8%BF%81%E7%A7%BB%E4%B8%BB%E9%94%AE%E6%80%BB%E7%BB%93/">
+            <span class="next-text nav-default">Django迁移主键总结</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="georgewange1994@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/GeorgeWang1994/" class="iconfont icon-github" title="github"></a>
+  <a href="https://GeorgeWang1994.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">GeorgeWang</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
