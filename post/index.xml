@@ -6,10 +6,19 @@
     <description>Recent content in Posts on GeorgeWang&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 07 Jun 2019 12:10:38 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 07 Jun 2019 16:24:17 +0800</lastBuildDate>
     
 	<atom:link href="https://GeorgeWang1994.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Go语言中的ticker实现</title>
+      <link>https://GeorgeWang1994.github.io/post/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84ticker%E5%AE%9E%E7%8E%B0/</link>
+      <pubDate>Fri, 07 Jun 2019 16:24:17 +0800</pubDate>
+      
+      <guid>https://GeorgeWang1994.github.io/post/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84ticker%E5%AE%9E%E7%8E%B0/</guid>
+      <description>Go语言中的Ticker实现 背景 最近在工作中需要实现起一个异步不停的去查询容器的服务的状态是否好了的功能，所以需要写一个Ticker，而且这</description>
+    </item>
     
     <item>
       <title>Django更新数据库</title>
