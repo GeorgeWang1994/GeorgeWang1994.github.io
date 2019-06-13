@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Rabbitmq 持久化 - GeorgeWang&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="referrer" content="no-referrer" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="GeorgeWang" /><meta name="description" content="Rabbitmq 持久化" /><meta name="keywords" content="George, blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.5 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://GeorgeWang1994.github.io/post/rabbitmq-%E6%8C%81%E4%B9%85%E5%8C%96/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.1b26492f.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Rabbitmq 持久化" />
+<meta property="og:description" content="Rabbitmq 持久化" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://GeorgeWang1994.github.io/post/rabbitmq-%E6%8C%81%E4%B9%85%E5%8C%96/" />
+<meta property="article:published_time" content="2019-06-13T07:55:44&#43;08:00"/>
+<meta property="article:modified_time" content="2019-06-13T07:55:44&#43;08:00"/>
+
+<meta itemprop="name" content="Rabbitmq 持久化">
+<meta itemprop="description" content="Rabbitmq 持久化">
+
+
+<meta itemprop="datePublished" content="2019-06-13T07:55:44&#43;08:00" />
+<meta itemprop="dateModified" content="2019-06-13T07:55:44&#43;08:00" />
+<meta itemprop="wordCount" content="665">
+
+
+
+<meta itemprop="keywords" content="Rabbitmq," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Rabbitmq 持久化"/>
+<meta name="twitter:description" content="Rabbitmq 持久化"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">GeorgeWang&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">GeorgeWang&#39;s Blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Rabbitmq 持久化</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-06-13 </span>
+        <div class="post-category">
+            <a href="/categories/rabbitmq/"> Rabbitmq </a>
+            </div>
+          <span class="more-meta"> 约 665 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#rabbitmq-持久化">Rabbitmq 持久化</a>
+<ul>
+<li><a href="#简介">简介</a></li>
+<li><a href="#设置">设置</a></li>
+<li><a href="#原理">原理</a></li>
+<li><a href="#最后">最后</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h1 id="rabbitmq-持久化">Rabbitmq 持久化</h1>
+
+<h2 id="简介">简介</h2>
+
+<p><img src="https://ws4.sinaimg.cn/large/007FyU7Tly1g3z9cjar2ij30ql07l0y2.jpg" alt="398358-20160321171125979-446067508" /></p>
+
+<p>最近需要在自己的项目中需要将消息进行持久化，除了我们所认知的数据库以外，<code>Rabbitmq</code>也能够做得到，因此特意在这里总结一下。</p>
+
+<h2 id="设置">设置</h2>
+
+<p>由于我使用的是<code>Kombu</code>，因此下面的设置都是按照这个来的。在默认的<code>Rabbitmq</code>实现中，如果相关的配置没有配置成持久化的，那么当连接断开的时候，保存在对列和交换器中的消息则会消失，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="mf">1.</span> <span class="n">Connection</span>
+
+<span class="err">不需要设置，和原来的使用一致</span>
+
+<span class="mf">2.</span> <span class="n">Exchange</span>
+
+<span class="n">durable</span><span class="o">=</span><span class="bp">True</span>  <span class="c1"># 默认值</span>
+<span class="n">auto_delete</span><span class="o">=</span><span class="bp">False</span>  <span class="c1"># 默认值，当没有消息时，自动删除交换器</span>
+<span class="n">delivery_mode</span><span class="o">=</span><span class="n">PERSISTENT_DELIVERY_MODE</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># 默认值</span>
+
+<span class="mf">3.</span> <span class="n">Queue</span>
+
+<span class="n">durable</span><span class="o">=</span><span class="bp">True</span>  <span class="c1"># 默认值</span>
+<span class="n">exclusive</span><span class="o">=</span><span class="bp">False</span>  <span class="c1"># 默认值，只能被当前连接来消费</span>
+<span class="n">auto_delete</span><span class="o">=</span><span class="bp">False</span>  <span class="c1"># 默认值，当没有消息时，自动删除队列</span>
+
+<span class="mf">4.</span> <span class="n">Consumer</span>
+
+<span class="n">no_ack</span><span class="o">=</span><span class="bp">True</span>  <span class="c1"># 默认不开启，自动将消息进行确认，有可能在消费者在接收到消息以后还没来得及ack就crash，因此改为手动进行确认</span>
+
+<span class="mf">5.</span> <span class="n">Producer</span>
+
+<span class="n">delivery_mode</span><span class="o">=</span><span class="n">PERSISTENT_DELIVERY_MODE</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># 在public发布消息的时候，将消息设置成持久化</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>需要注意的是，如果已经声明了一个持久化的对列或者交换器，那么就无法再将其更改为非持久化的，只能删除再次重新创建。</p>
+
+<h2 id="原理">原理</h2>
+
+<p><code>Rabbitmq</code>会维护一个<code>buffer</code>，每次都会将消息写入到 buffer 中，如果其已经满了，则将其写入到文件中（但是还未保存到磁盘中），当在每一个<code>25ms</code>的间隔 Rabbitmq 都会将 buffer 中的内容以及未保存到磁盘中的文件都存储到磁盘中。或者，当没有后续的消息写入时，也会直接将消息保存到磁盘中。</p>
+
+<p>当所有文件中被删除的消息的比例超过了<code>阀值</code>（默认是50%），则会触发将消息的文件合并，提高磁盘的利用率。</p>
+
+<h2 id="最后">最后</h2>
+
+<p>写入硬盘相比于纯粹写入到内存来说，性能肯定比不上，从而降低了 Rabbitmq 的吞吐量。而且上面并没有考虑到 Rabbitmq 的可靠性。</p>
+
+<p>下次再说吧。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">GeorgeWang</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-06-13
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://ws1.sinaimg.cn/mw690/007FyU7Tgy1g302zcpej1j30u00u0wll.jpg">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/rabbitmq/">Rabbitmq</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84ticker%E5%AE%9E%E7%8E%B0/">
+            <span class="next-text nav-default">Go语言中的ticker实现</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="georgewange1994@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/GeorgeWang1994/" class="iconfont icon-github" title="github"></a>
+  <a href="https://GeorgeWang1994.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">GeorgeWang</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

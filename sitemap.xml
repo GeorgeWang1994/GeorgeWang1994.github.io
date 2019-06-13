@@ -10,13 +10,44 @@
   
   <url>
     <loc>https://GeorgeWang1994.github.io/categories/</loc>
-    <lastmod>2019-06-07T16:24:17+08:00</lastmod>
+    <lastmod>2019-06-13T07:55:44+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://GeorgeWang1994.github.io/</loc>
-    <lastmod>2019-06-07T16:24:17+08:00</lastmod>
+    <lastmod>2019-06-13T07:55:44+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://GeorgeWang1994.github.io/post/</loc>
+    <lastmod>2019-06-13T07:55:44+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://GeorgeWang1994.github.io/categories/rabbitmq/</loc>
+    <lastmod>2019-06-13T07:55:44+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://GeorgeWang1994.github.io/tags/rabbitmq/</loc>
+    <lastmod>2019-06-13T07:55:44+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://GeorgeWang1994.github.io/post/rabbitmq-%E6%8C%81%E4%B9%85%E5%8C%96/</loc>
+    <lastmod>2019-06-13T07:55:44+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://GeorgeWang1994.github.io/tags/</loc>
+    <lastmod>2019-06-13T07:55:44+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -31,18 +62,6 @@
     <lastmod>2019-06-07T16:24:17+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://GeorgeWang1994.github.io/post/</loc>
-    <lastmod>2019-06-07T16:24:17+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://GeorgeWang1994.github.io/tags/</loc>
-    <lastmod>2019-06-07T16:24:17+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
