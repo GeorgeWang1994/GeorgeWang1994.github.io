@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dockerfile on GeorgeWang&#39;s Blog</title>
+    <link>https://GeorgeWang1994.github.io/tags/dockerfile/</link>
+    <description>Recent content in Dockerfile on GeorgeWang&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 21 Jul 2019 22:25:37 +0800</lastBuildDate>
+    
+	<atom:link href="https://GeorgeWang1994.github.io/tags/dockerfile/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>构建Docker镜像</title>
+      <link>https://GeorgeWang1994.github.io/post/%E6%9E%84%E5%BB%BAdocker%E9%95%9C%E5%83%8F/</link>
+      <pubDate>Sun, 21 Jul 2019 22:25:37 +0800</pubDate>
+      
+      <guid>https://GeorgeWang1994.github.io/post/%E6%9E%84%E5%BB%BAdocker%E9%95%9C%E5%83%8F/</guid>
+      <description>创建Dockerfile主要包括四个方面，基础镜像信息、维护者信息、镜像操作命令、容器启动时操作命令； 基础镜像信息命令 FROM 告知创建的镜像来自于</description>
+    </item>
+    
+  </channel>
+</rss>

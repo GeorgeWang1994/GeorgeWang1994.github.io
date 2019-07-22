@@ -10,20 +10,51 @@
   
   <url>
     <loc>https://GeorgeWang1994.github.io/categories/</loc>
-    <lastmod>2019-07-04T22:25:37+08:00</lastmod>
+    <lastmod>2019-07-21T22:25:37+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://GeorgeWang1994.github.io/categories/docker/</loc>
+    <lastmod>2019-07-21T22:25:37+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://GeorgeWang1994.github.io/tags/dockerfile/</loc>
+    <lastmod>2019-07-21T22:25:37+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://GeorgeWang1994.github.io/</loc>
-    <lastmod>2019-07-04T22:25:37+08:00</lastmod>
+    <lastmod>2019-07-21T22:25:37+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://GeorgeWang1994.github.io/post/</loc>
-    <lastmod>2019-07-04T22:25:37+08:00</lastmod>
+    <lastmod>2019-07-21T22:25:37+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://GeorgeWang1994.github.io/tags/</loc>
+    <lastmod>2019-07-21T22:25:37+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://GeorgeWang1994.github.io/tags/docker/</loc>
+    <lastmod>2019-07-21T22:25:37+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://GeorgeWang1994.github.io/post/%E6%9E%84%E5%BB%BAdocker%E9%95%9C%E5%83%8F/</loc>
+    <lastmod>2019-07-21T22:25:37+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -37,12 +68,6 @@
     <lastmod>2019-07-04T22:25:37+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://GeorgeWang1994.github.io/tags/</loc>
-    <lastmod>2019-07-04T22:25:37+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -96,6 +121,13 @@
   </url>
   
   <url>
+    <loc>https://GeorgeWang1994.github.io/post/django%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2019-06-07T12:10:38+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://GeorgeWang1994.github.io/categories/django/</loc>
     <lastmod>2019-06-07T12:10:38+08:00</lastmod>
     <priority>0</priority>
@@ -105,20 +137,6 @@
     <loc>https://GeorgeWang1994.github.io/tags/django/</loc>
     <lastmod>2019-06-07T12:10:38+08:00</lastmod>
     <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://GeorgeWang1994.github.io/post/django%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2019-06-07T12:10:38+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://GeorgeWang1994.github.io/post/docker%E7%8A%B6%E6%80%81/</loc>
-    <lastmod>2019-06-03T21:21:39+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
   </url>
   
   <url>
@@ -224,22 +242,10 @@
   </url>
   
   <url>
-    <loc>https://GeorgeWang1994.github.io/categories/docker/</loc>
-    <lastmod>2019-05-19T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://GeorgeWang1994.github.io/post/docker%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/</loc>
     <lastmod>2019-05-19T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://GeorgeWang1994.github.io/tags/docker/</loc>
-    <lastmod>2019-05-19T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

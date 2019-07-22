@@ -6,10 +6,19 @@
     <description>Recent content in Docker on GeorgeWang&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 19 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 21 Jul 2019 22:25:37 +0800</lastBuildDate>
     
 	<atom:link href="https://GeorgeWang1994.github.io/categories/docker/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>构建Docker镜像</title>
+      <link>https://GeorgeWang1994.github.io/post/%E6%9E%84%E5%BB%BAdocker%E9%95%9C%E5%83%8F/</link>
+      <pubDate>Sun, 21 Jul 2019 22:25:37 +0800</pubDate>
+      
+      <guid>https://GeorgeWang1994.github.io/post/%E6%9E%84%E5%BB%BAdocker%E9%95%9C%E5%83%8F/</guid>
+      <description>创建Dockerfile主要包括四个方面，基础镜像信息、维护者信息、镜像操作命令、容器启动时操作命令； 基础镜像信息命令 FROM 告知创建的镜像来自于</description>
+    </item>
     
     <item>
       <title>Docker使用总结</title>
