@@ -121,13 +121,6 @@
   </url>
   
   <url>
-    <loc>https://GeorgeWang1994.github.io/post/django%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2019-06-07T12:10:38+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://GeorgeWang1994.github.io/categories/django/</loc>
     <lastmod>2019-06-07T12:10:38+08:00</lastmod>
     <priority>0</priority>
@@ -137,6 +130,13 @@
     <loc>https://GeorgeWang1994.github.io/tags/django/</loc>
     <lastmod>2019-06-07T12:10:38+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://GeorgeWang1994.github.io/post/django%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2019-06-07T12:10:38+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
